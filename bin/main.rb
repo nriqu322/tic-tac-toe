@@ -2,7 +2,7 @@
 exit = false
 
 until exit do
-  puts "Welcome to Luis and Oscar's Tic Tac Toe All (All rights reserved 2020)"
+  puts "Welcome to Luis and Oscar's Tic Tac Toe (All rights reserved 2020)"
   while true do
     puts "Player 1 (X) name:"
     p1name = gets.chomp
@@ -31,52 +31,110 @@ until exit do
   player_1_wins = false
   player_2_wins = false
   while true do
-    while true do
-      puts "Player 1 1select a row position between 1 and 3"
-      play_row_1 = gets.chomp
-      unless play_row_1 == "1" || play_row_1 == "2" || play_row_1 == "3"
-        puts "enter a valid number"
-        next
+    #
+    # PLAYER 1 TURN
+    #
+
+    space_occupied = true
+    while space_occupied do
+      while true do
+        puts "Player 1: Select a row position between 1 and 3"
+        play_row_1 = gets.chomp
+        unless play_row_1 == "1" || play_row_1 == "2" || play_row_1 == "3"
+          puts "Enter a valid number."
+          next
+        end
+        break
       end
-      break
+
+      while true do
+        puts "Player 1: Select a column position between 1 and 3"
+        play_col_1 = gets.chomp
+        unless play_col_1 == "1" || play_col_1 == "2" || play_col_1 == "3"
+          puts "Enter a valid number."
+          next
+        end
+        break
+      end
+
+      # space_occupied = board.occupied?(play_col_1, play_row_1)
+      space_occupied = false
+      if space_occupied 
+        puts "Square #{play_col_1}, #{play_row_1} is occupied. Choose an empty square."
+      end
+
     end
-    puts "Player 1 select a column position between 1 and 3"
-    play_col_1 = gets.chomp
+
+    # board.display
 
     # player_1_wins = player_1.victory
-    if player_1.victory == true
-      puts "Player 1 win the match"
+    if player_1_wins == true
+      puts "Player 1 wins the match!"
       break
     end
     # full_board = board.isfull()
-    if board.isfull == true
-      puts "It's a draw"
+    if full_board == true
+      puts "It's a draw..."
       break
     end
 
-    puts "Player 2 1select a row position between 1 and 3"
-    play_row_2 = gets.chomp
-    puts "Player 2 select a column position between 1 and 3"
-    play_col_2 = gets.chomp
+    #
+    # PLAYER 2 TURN
+    #
 
-    # player_2_wins = player_2.victory
-    if player_2.victory == true
-      puts "Player 2 win the match"
+    space_occupied = true
+    while space_occupied do
+      while true do
+        puts "Player 2: Select a row position between 1 and 3"
+        play_row_2 = gets.chomp
+        unless play_row_2 == "1" || play_row_2 == "2" || play_row_2 == "3"
+          puts "Enter a valid number."
+          next
+        end
+        break
+      end
+
+      while true do
+        puts "Player 2: Select a column position between 1 and 3"
+        play_col_2 = gets.chomp
+        unless play_col_2 == "1" || play_col_2 == "2" || play_col_2 == "3"
+          puts "Enter a valid number."
+          next
+        end
+        break
+      end
+
+      # space_occupied = board.occupied?(play_col_2, play_row_2)
+      space_occupied = false
+      if space_occupied 
+        puts "Square #{play_col_2}, #{play_row_2} is occupied. Choose an empty square."
+      end
+
+    end
+
+    # board.display
+
+    # player_1_wins = player_1.victory
+    player_2_wins = true
+    if player_2_wins == true
+      puts "Player 2 wins the match!"
       break
     end
     # full_board = board.isfull()
-    if board.isfull == true
-      puts "It's a draw"
+    if full_board == true
+      puts "It's a draw..."
       break
     end
+
   end
 
-  puts "Exit game? (Y/N)"
+  puts "Play again? (Y/N)"
   exit = gets.chomp
-  case exit
-  when "Y"
-    exit = true
+  case exit.upcase
   when "N"
+    exit = true
+  when "Y"
+    puts "Bye!"
     exit = false
   else 
     puts "Wrong option."
