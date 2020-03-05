@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby is the top line
 # rubocop : disable Metrics/BlockLength
+require_relative './lib/board.rb'
+# board = Board.new
+
 exit = false
 
 until exit
@@ -57,7 +60,8 @@ until exit
 
     end
 
-    # board.display
+    board.player_move(player_1_col, player_1_row, X)
+    board.display
 
     # player_1_wins = player_1.victory
     if player_1_wins == true
@@ -102,7 +106,8 @@ until exit
 
     end
 
-    # board.display
+    board.player_move(player_2_col, player_2_row, O)
+    board.display
 
     # player_1_wins = player_1.victory
     player_2_wins = true
@@ -131,4 +136,6 @@ until exit
     exit = gets.chomp
   end
 end
+
+
 # rubocop : enable Metrics/BlockLength
