@@ -3,8 +3,8 @@ class Board
   def initialize
     @arr = [
       ["A", "B", "X"],
-      ["D", "E", "X"],
-      ["G", "H", "X"]
+      ["D", "X", "F"],
+      ["X", "H", "I"]
     ]
   end
 
@@ -26,27 +26,37 @@ class Board
   def check_symbol_victory(symbol)
     # check columns
     arr.each
-    (0..3).each do |col_ix|
+    (0..2).each do |col_ix|
       col = []
       arr.each do |row|
-        puts row[col_ix]
         col << row[col_ix]
       end
       if col.all?(symbol)
-        puts "#{symbol} victory!"
         return true
       end
     end
     # check rows
     arr.each do |row|
-      # row.each do |col|
-      #   puts col
-      # end
       if row.all?(symbol)
-        puts "#{symbol} victory!"
         return true
       end
     end
     # check diagonals
+    diag = []
+    (0..2).each do |ix|
+      diag << arr[ix][ix]
+    end
+    if diag.all?(symbol)
+      return true
+    end
+
+    diag = []
+    inv = [2, 1, 0]
+    (0..2).each do |ix|
+      diag << arr[ix][inv[ix]]
+    end
+    if diag.all?(symbol)
+      return true
+    end
   end
 end
