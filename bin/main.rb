@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby is the top line
 # rubocop : disable Metrics/BlockLength
 require_relative '../lib/board.rb'
-
+require_relative '../lib/players.rb'
 board = Board.new
-exit_game = false
 
+exit_game = false
+p1name = ""
+p2name = ""
 puts "Welcome to Luis and Oscar's Tic Tac Toe (All rights reserved 2020)"
 puts board.display
 loop do
@@ -14,6 +16,7 @@ loop do
 
   puts 'Enter a valid name.'
 end
+player1 = Players.new(p1name, "X")
 
 loop do
   puts 'Player 2 (O) name:'
@@ -22,6 +25,7 @@ loop do
 
   puts 'Enter a valid name.'
 end
+player2 = Players.new(p2name, "O")
 
 until exit_game
   full_board = false
@@ -60,12 +64,13 @@ until exit_game
       puts "Square #{player_1_col}, #{player_1_row} is occupied. Choose an empty square." if space_occupied
     end
 
-    board.player_move(player_1_col, player_1_row, "X")
+    board.player_move(player_1_col, player_1_row, player1.sym)
     puts board.display
 
-    player_1_wins = board.check_symbol_victory("X")
+    player_1_wins = board.check_symbol_victory(player1.sym)
     if player_1_wins == true
-      puts 'Player 1 wins the match!'
+      puts "#{player1.name} wins the match!"
+      player1.inc_score
       break
     end
 
@@ -108,12 +113,13 @@ until exit_game
 
     end
 
-    board.player_move(player_2_col, player_2_row, "O")
+    board.player_move(player_2_col, player_2_row, player2.sym)
     puts board.display
 
-    player_2_wins = board.check_symbol_victory("O")
+    player_2_wins = board.check_symbol_victory(player2.sym)
     if player_2_wins == true
-      puts 'Player 2 wins the match!'
+      puts "#{player2.name} wins the match!"
+      player2.inc_score
       break
     end
     full_board = board.isfull?
@@ -123,6 +129,10 @@ until exit_game
     end
   end
 
+  puts "Score Table"
+  puts "#{player1.name} your score is #{player1.score}"
+  puts "#{player2.name} your score is #{player2.score}"
+  
   loop do
     puts 'Play again? (Y/N)'
     player_exit = gets.chomp

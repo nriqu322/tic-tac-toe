@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :arr
+  attr_reader :arr
   def initialize
     @arr = [
       [" ", " ", " "],
