@@ -8,7 +8,7 @@ exit_game = false
 p1name = ""
 p2name = ""
 puts "Welcome to Luis and Oscar's Tic Tac Toe (All rights reserved 2020)"
-puts board.display
+
 loop do
   puts 'Player 1 (X) name:'
   p1name = gets.chomp
@@ -28,6 +28,7 @@ end
 player2 = Players.new(p2name, "O")
 
 until exit_game
+  puts board.display
   full_board = false
   player_1_wins = false
   player_2_wins = false
@@ -41,7 +42,7 @@ until exit_game
     space_occupied = true
     while space_occupied
       loop do
-        puts 'Player 1: Select a row position between 1 and 3'
+        puts "#{player1.name}: Select a row position between 1 and 3"
         player_1_row = gets.chomp
         unless valid_coords.include?(player_1_row)
           puts 'Enter a valid number.'
@@ -51,7 +52,7 @@ until exit_game
       end
 
       loop do
-        puts 'Player 1: Select a column position between 1 and 3'
+        puts "#{player1.name}: Select a column position between 1 and 3"
         player_1_col = gets.chomp
         unless valid_coords.include?(player_1_col)
           puts 'Enter a valid number.'
@@ -89,7 +90,7 @@ until exit_game
     space_occupied = true
     while space_occupied
       loop do
-        puts 'Player 2: Select a row position between 1 and 3'
+        puts "#{player2.name}: Select a row position between 1 and 3"
         player_2_row = gets.chomp
         unless valid_coords.include?(player_2_row)
           puts 'Enter a valid number.'
@@ -99,7 +100,7 @@ until exit_game
       end
 
       loop do
-        puts 'Player 2: Select a column position between 1 and 3'
+        puts "#{player2.name}: Select a column position between 1 and 3"
         player_2_col = gets.chomp
         unless valid_coords.include?(player_2_col)
           puts 'Enter a valid number.'
@@ -133,15 +134,17 @@ until exit_game
   puts "#{player1.name} your score is #{player1.score}"
   puts "#{player2.name} your score is #{player2.score}"
   
+  board.clean
+
   loop do
     puts 'Play again? (Y/N)'
     player_exit = gets.chomp
     case player_exit.upcase
     when 'N'
+      puts 'Bye!'
       exit_game = true
       break
     when 'Y'
-      puts 'Bye!'
       exit_game = false
       break
     end  
