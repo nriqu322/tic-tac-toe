@@ -7,6 +7,7 @@ exit = false
 
 until exit
   puts board.display
+  board.check_symbol_victory("X")
   puts "Welcome to Luis and Oscar's Tic Tac Toe (All rights reserved 2020)"
   loop do
     puts 'Player 1 (X) name:'
