@@ -62,7 +62,7 @@ until exit_game
       end
 
       space_occupied = board.space_occupied?(player_1_row, player_1_col)
-      puts "Square #{player_1_col}, #{player_1_row} is occupied. Choose an empty square." if space_occupied
+      puts "Square #{player_1_row}, #{player_1_col} is occupied. Choose an empty square." if space_occupied
     end
 
     board.player_move(player_1_col, player_1_row, player1.sym)
@@ -110,7 +110,7 @@ until exit_game
       end
 
       space_occupied = board.space_occupied?(player_2_row, player_2_col)
-      puts "Square #{player_2_col}, #{player_2_row} is occupied. Choose an empty square." if space_occupied
+      puts "Square #{player_2_row}, #{player_2_col} is occupied. Choose an empty square." if space_occupied
 
     end
 
