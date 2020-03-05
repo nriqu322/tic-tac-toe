@@ -2,11 +2,11 @@
 # rubocop : disable Metrics/BlockLength
 require_relative '../lib/board.rb'
 
-the_board = Board.new
+board = Board.new
 exit = false
 
 until exit
-  puts the_board.display
+  puts board.display
   puts "Welcome to Luis and Oscar's Tic Tac Toe (All rights reserved 2020)"
   loop do
     puts 'Player 1 (X) name:'
@@ -32,7 +32,8 @@ until exit
     #
     # PLAYER 1 TURN
     #
-
+    player_1_col = '0'
+    player_1_row = '0'
     space_occupied = true
     while space_occupied
       loop do
@@ -61,8 +62,8 @@ until exit
 
     end
 
-    board.player_move(player_1_col, player_1_row, X)
-    board.display
+    board.player_move(player_1_col.to_i, player_1_row.to_i, "X")
+    puts board.display
 
     # player_1_wins = player_1.victory
     if player_1_wins == true
@@ -79,6 +80,8 @@ until exit
     # PLAYER 2 TURN
     #
 
+    player_2_col = '0'
+    player_2_row = '0'
     space_occupied = true
     while space_occupied
       loop do
@@ -107,8 +110,8 @@ until exit
 
     end
 
-    board.player_move(player_2_col, player_2_row, O)
-    board.display
+    board.player_move(player_2_col.to_i, player_2_row.to_i, "O")
+    puts board.display
 
     # player_1_wins = player_1.victory
     player_2_wins = true
