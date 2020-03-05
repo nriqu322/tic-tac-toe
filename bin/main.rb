@@ -1,11 +1,12 @@
 #!/usr/bin/env ruby is the top line
 # rubocop : disable Metrics/BlockLength
-require_relative './lib/board.rb'
-# board = Board.new
+require_relative '../lib/board.rb'
 
+the_board = Board.new
 exit = false
 
 until exit
+  puts the_board.display
   puts "Welcome to Luis and Oscar's Tic Tac Toe (All rights reserved 2020)"
   loop do
     puts 'Player 1 (X) name:'
