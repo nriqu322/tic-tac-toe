@@ -1,10 +1,10 @@
+# rubocop : disable Metrics/MethodLength
 class Board
-
   def initialize
     @arr = [
-      [" ", " ", " "],
-      [" ", " ", " "],
-      [" ", " ", " "]
+      [' ', ' ', ' '],
+      [' ', ' ', ' '],
+      [' ', ' ', ' ']
     ]
   end
 
@@ -13,7 +13,7 @@ class Board
   end
 
   def display
-    return %Q(
+    %(
  #{@arr[0][0]} | #{@arr[0][1]} | #{@arr[0][2]}
 ---+---+---
  #{@arr[1][0]} | #{@arr[1][1]} | #{@arr[1][2]}
@@ -31,55 +31,46 @@ class Board
       @arr.each do |row|
         col << row[col_ix]
       end
-      if col.all?(symbol)
-        return true
-      end
+      return true if col.all?(symbol)
     end
     # check rows
     @arr.each do |row|
-      if row.all?(symbol)
-        return true
-      end
+      return true if row.all?(symbol)
     end
     # check diagonals
     diag = []
     (0..2).each do |ix|
       diag << @arr[ix][ix]
     end
-    if diag.all?(symbol)
-      return true
-    end
+    return true if diag.all?(symbol)
 
     diag = []
     inv = [2, 1, 0]
     (0..2).each do |ix|
       diag << @arr[ix][inv[ix]]
     end
-    if diag.all?(symbol)
-      return true
-    end
+    return true if diag.all?(symbol)
+
     # return false if no victory
-    return false
+    false
   end
 
   def isfull?
-    return true if @arr.flatten.none?(" ")
-    return false
+    return true if @arr.flatten.none?(' ')
+
+    false
   end
 
   def space_occupied?(row, col)
-    if @arr[row.to_i - 1][col.to_i - 1] == " "
-      return false
-    else
-      return true
-    end
+    (@arr[row.to_i - 1][col.to_i - 1] != ' ')
   end
 
   def clean
     @arr = [
-      [" ", " ", " "],
-      [" ", " ", " "],
-      [" ", " ", " "]
+      [' ', ' ', ' '],
+      [' ', ' ', ' '],
+      [' ', ' ', ' ']
     ]
   end
 end
+# rubocop : enable Metrics/MethodLength

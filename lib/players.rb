@@ -8,7 +8,6 @@ class Players
   end
 
   def inc_score
-    @score = @score + 1
+    @score += 1
   end
-
 end

@@ -5,8 +5,8 @@ require_relative '../lib/players.rb'
 board = Board.new
 
 exit_game = false
-p1name = ""
-p2name = ""
+p1name = ''
+p2name = ''
 puts "Welcome to Luis and Oscar's Tic Tac Toe (All rights reserved 2020)"
 
 loop do
@@ -16,7 +16,7 @@ loop do
 
   puts 'Enter a valid name.'
 end
-player1 = Players.new(p1name, "X")
+player1 = Players.new(p1name, 'X')
 
 loop do
   puts 'Player 2 (O) name:'
@@ -25,7 +25,7 @@ loop do
 
   puts 'Enter a valid name.'
 end
-player2 = Players.new(p2name, "O")
+player2 = Players.new(p2name, 'O')
 
 until exit_game
   puts board.display
@@ -130,10 +130,10 @@ until exit_game
     end
   end
 
-  puts "Score Table"
+  puts 'Score Table'
   puts "#{player1.name} your score is #{player1.score}"
   puts "#{player2.name} your score is #{player2.score}"
-  
+
   board.clean
 
   loop do
@@ -147,9 +147,8 @@ until exit_game
     when 'Y'
       exit_game = false
       break
-    end  
+    end
   end
 end
-
 
 # rubocop : enable Metrics/BlockLength
