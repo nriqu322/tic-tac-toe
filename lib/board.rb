@@ -2,14 +2,14 @@ class Board
   attr_accessor :arr
   def initialize
     @arr = [
-      ["A", "B", "X"],
-      ["D", "X", "F"],
-      ["X", "H", "I"]
+      [" ", " ", " "],
+      [" ", " ", " "],
+      [" ", " ", " "]
     ]
   end
 
   def player_move(col, row, sym)
-    arr[row - 1][col - 1] = sym
+    arr[row.to_i - 1][col.to_i - 1] = sym
   end
 
   def display
@@ -62,8 +62,13 @@ class Board
     return false
   end
 
-  def space_occupied(row, col)
-    if arr[row][col] == " "
+  def isfull?
+    return true if arr.flatten.none?(" ")
+    return false
+  end
+
+  def space_occupied?(row, col)
+    if arr[row.to_i - 1][col.to_i - 1] == " "
       return false
     else
       return true

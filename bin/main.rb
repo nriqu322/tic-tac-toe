@@ -3,28 +3,27 @@
 require_relative '../lib/board.rb'
 
 board = Board.new
-exit = false
+exit_game = false
 
-until exit
-  puts board.display
-  board.check_symbol_victory("X")
-  puts "Welcome to Luis and Oscar's Tic Tac Toe (All rights reserved 2020)"
-  loop do
-    puts 'Player 1 (X) name:'
-    p1name = gets.chomp
-    break unless p1name == ''
+puts "Welcome to Luis and Oscar's Tic Tac Toe (All rights reserved 2020)"
+puts board.display
+loop do
+  puts 'Player 1 (X) name:'
+  p1name = gets.chomp
+  break unless p1name == ''
 
-    puts 'Enter a valid name.'
-  end
+  puts 'Enter a valid name.'
+end
 
-  loop do
-    puts 'Player 2 (O) name:'
-    p2name = gets.chomp
-    break unless p2name == ''
+loop do
+  puts 'Player 2 (O) name:'
+  p2name = gets.chomp
+  break unless p2name == ''
 
-    puts 'Enter a valid name.'
-  end
+  puts 'Enter a valid name.'
+end
 
+until exit_game
   full_board = false
   player_1_wins = false
   player_2_wins = false
@@ -57,21 +56,20 @@ until exit
         break
       end
 
-      # space_occupied = board.occupied?(player_1_col, player_1_row)
-      space_occupied = false
+      space_occupied = board.space_occupied?(player_1_row, player_1_col)
       puts "Square #{player_1_col}, #{player_1_row} is occupied. Choose an empty square." if space_occupied
-
     end
 
-    board.player_move(player_1_col.to_i, player_1_row.to_i, "X")
+    board.player_move(player_1_col, player_1_row, "X")
     puts board.display
 
-    # player_1_wins = player_1.victory
+    player_1_wins = board.check_symbol_victory("X")
     if player_1_wins == true
       puts 'Player 1 wins the match!'
       break
     end
-    # full_board = board.isfull()
+
+    full_board = board.isfull?
     if full_board == true
       puts "It's a draw..."
       break
@@ -105,40 +103,38 @@ until exit
         break
       end
 
-      # space_occupied = board.occupied?(player_2_col, player_2_row)
-      space_occupied = false
+      space_occupied = board.space_occupied?(player_2_row, player_2_col)
       puts "Square #{player_2_col}, #{player_2_row} is occupied. Choose an empty square." if space_occupied
 
     end
 
-    board.player_move(player_2_col.to_i, player_2_row.to_i, "O")
+    board.player_move(player_2_col, player_2_row, "O")
     puts board.display
 
-    # player_1_wins = player_1.victory
-    player_2_wins = true
+    player_2_wins = board.check_symbol_victory("O")
     if player_2_wins == true
       puts 'Player 2 wins the match!'
       break
     end
-    # full_board = board.isfull()
+    full_board = board.isfull?
     if full_board == true
       puts "It's a draw..."
       break
     end
   end
 
-  puts 'Play again? (Y/N)'
-  exit = gets.chomp
-  case exit.upcase
-  when 'N'
-    exit = true
-  when 'Y'
-    puts 'Bye!'
-    exit = false
-  else
-    puts 'Wrong option.'
-    puts 'Exit game? (Y/N)'
-    exit = gets.chomp
+  loop do
+    puts 'Play again? (Y/N)'
+    player_exit = gets.chomp
+    case player_exit.upcase
+    when 'N'
+      exit_game = true
+      break
+    when 'Y'
+      puts 'Bye!'
+      exit_game = false
+      break
+    end  
   end
 end
 
