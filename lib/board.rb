@@ -58,5 +58,15 @@ class Board
     if diag.all?(symbol)
       return true
     end
+    # return false if no victory
+    return false
+  end
+
+  def space_occupied(row, col)
+    if arr[row][col] == " "
+      return false
+    else
+      return true
+    end
   end
 end
