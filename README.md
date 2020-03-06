@@ -28,7 +28,7 @@ Luis
 Player 2 (O) name:
 Oscar
 ``` 
-* Step 2: After you enter the names it's player 1's turn. Select an empty square introducing first the row and then the column
+* Step 2: After you enter the names it's player 1's turn. Select an empty square introducing first the row and then the column.
 ``` 
   c1  c2  c3
 r1   |   |  
@@ -55,7 +55,7 @@ r2   | O |
   ---+---+---
 r3   |   |  
 ``` 
-* Step 4: Each player take turns until one of them wins
+* Step 4: Each player take turns until one of them wins.
 ``` 
   c1  c2  c3
 r1 X | X | X
@@ -69,7 +69,7 @@ Score Table
 Luis your score is 1
 Oscar your score is 0
 ``` 
-* Step 5: It's a draw if the board is full and no one wins
+* Step 5: It's a draw if the board is full and no one wins.
 ``` 
   c1  c2  c3
 r1 X | O | X
