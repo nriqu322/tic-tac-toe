@@ -1,5 +1,5 @@
-#!/usr/bin/env ruby is the top line
-# rubocop : disable Metrics/BlockLength
+#!/usr/bin/env ruby
+# rubocop : disable Metrics/MethodLength
 require_relative '../lib/board.rb'
 require_relative '../lib/players.rb'
 board = Board.new
@@ -27,46 +27,51 @@ loop do
 end
 player2 = Players.new(p2name, 'O')
 
+def player_turn(player_x, board)
+  valid_coords = %w[1 2 3]
+  player_col = '0'
+  player_row = '0'
+  space_occupied = true
+  while space_occupied
+    loop do
+      puts "#{player_x.name}: Select a row position between 1 and 3"
+      player_row = gets.chomp
+      unless valid_coords.include?(player_row)
+        puts 'Enter a valid number.'
+        next
+      end
+      break
+    end
+
+    loop do
+      puts "#{player_x.name}: Select a column position between 1 and 3"
+      player_col = gets.chomp
+      unless valid_coords.include?(player_col)
+        puts 'Enter a valid number.'
+        next
+      end
+      break
+    end
+
+    space_occupied = board.space_occupied?(player_row, player_col)
+    puts "Square #{player_row}, #{player_col} is occupied. Choose an empty square." if space_occupied
+  end
+
+  board.player_move(player_col, player_row, player_x.sym)
+  puts board.display
+end
+
+def player_score(player_x)
+  puts "#{player_x.name} your score is #{player_x.score}"
+end
+
 until exit_game
   puts board.display
   full_board = false
   player_1_wins = false
   player_2_wins = false
-  valid_coords = %w[1 2 3]
   loop do
-    #
-    # PLAYER 1 TURN
-    #
-    player_1_col = '0'
-    player_1_row = '0'
-    space_occupied = true
-    while space_occupied
-      loop do
-        puts "#{player1.name}: Select a row position between 1 and 3"
-        player_1_row = gets.chomp
-        unless valid_coords.include?(player_1_row)
-          puts 'Enter a valid number.'
-          next
-        end
-        break
-      end
-
-      loop do
-        puts "#{player1.name}: Select a column position between 1 and 3"
-        player_1_col = gets.chomp
-        unless valid_coords.include?(player_1_col)
-          puts 'Enter a valid number.'
-          next
-        end
-        break
-      end
-
-      space_occupied = board.space_occupied?(player_1_row, player_1_col)
-      puts "Square #{player_1_row}, #{player_1_col} is occupied. Choose an empty square." if space_occupied
-    end
-
-    board.player_move(player_1_col, player_1_row, player1.sym)
-    puts board.display
+    player_turn(player1, board)
 
     player_1_wins = board.check_symbol_victory(player1.sym)
     if player_1_wins == true
@@ -81,41 +86,7 @@ until exit_game
       break
     end
 
-    #
-    # PLAYER 2 TURN
-    #
-
-    player_2_col = '0'
-    player_2_row = '0'
-    space_occupied = true
-    while space_occupied
-      loop do
-        puts "#{player2.name}: Select a row position between 1 and 3"
-        player_2_row = gets.chomp
-        unless valid_coords.include?(player_2_row)
-          puts 'Enter a valid number.'
-          next
-        end
-        break
-      end
-
-      loop do
-        puts "#{player2.name}: Select a column position between 1 and 3"
-        player_2_col = gets.chomp
-        unless valid_coords.include?(player_2_col)
-          puts 'Enter a valid number.'
-          next
-        end
-        break
-      end
-
-      space_occupied = board.space_occupied?(player_2_row, player_2_col)
-      puts "Square #{player_2_row}, #{player_2_col} is occupied. Choose an empty square." if space_occupied
-
-    end
-
-    board.player_move(player_2_col, player_2_row, player2.sym)
-    puts board.display
+    player_turn(player2, board)
 
     player_2_wins = board.check_symbol_victory(player2.sym)
     if player_2_wins == true
@@ -131,8 +102,8 @@ until exit_game
   end
 
   puts 'Score Table'
-  puts "#{player1.name} your score is #{player1.score}"
-  puts "#{player2.name} your score is #{player2.score}"
+  player_score(player1)
+  player_score(player2)
 
   board.clean
 
@@ -150,5 +121,4 @@ until exit_game
     end
   end
 end
-
-# rubocop : enable Metrics/BlockLength
+# rubocop : enable Metrics/MethodLength
