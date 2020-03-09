@@ -1,5 +1,5 @@
 # spec/board_spec.rb
-require './lib/board.rb'
+require_relative '../lib/board.rb'
 
 RSpec.describe Board do
   let(:board) { Board.new }
