@@ -106,6 +106,13 @@ Bye!
 * Ruby
 * Rubocop
 
+## Run test
+In your terminal run :
+
+``` 
+  rspec
+``` 
+
 ## Authors ![Hireable](https://img.shields.io/badge/HIREABLE-YES-yellowgreen&?style=for-the-badge)
 
 👤 **Luis Saavedra**
